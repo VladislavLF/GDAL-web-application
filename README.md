@@ -42,7 +42,7 @@
   
 Проект демонстрирует работу с геоданными, формами ввода и сложными расчетами в Django-приложении.<br/>  
 
-**Скрины проекта**
+**Скрины проекта**<br/>
 ![image](https://github.com/user-attachments/assets/53671eaa-2946-448d-aec3-12cb6beaabf1)
 ![image](https://github.com/user-attachments/assets/f5fd7439-2a3b-4159-8328-5978d0724eff)
 ![image](https://github.com/user-attachments/assets/543776d6-b950-47a1-98bc-c95d43590003)
