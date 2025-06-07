@@ -1,0 +1,67 @@
+{% extends 'layouts/base_page.html' %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+<a href="{% url 'add_warehouse' %}">Добавить склад</a><br><br>
+<a href="{% url 'add_truck' %}" class="btn btn-primary">Добавить самосвал</a>
+<h2>Выбор склада</h2>
+<form method="get">
+    <label for="warehouse">Склад:</label>
+    <select name="warehouse" id="warehouse" onchange="this.form.submit()">
+        <option value="">-- Выберите склад --</option>
+        {% for warehouse in warehouses %}
+            <option value="{{ warehouse.id }}" {% if warehouse == selected_warehouse %}selected{% endif %}>
+                {{ warehouse.name }}
+            </option>
+        {% endfor %}
+    </select>
+</form>
+
+{% if selected_warehouse %}
+<hr>
+<h2>Таблица 1</h2>
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="warehouse" value="{{ selected_warehouse.id }}">
+    <table>
+        <tr>
+            <th>Бортовой номер</th>
+            <th>Модель</th>
+            <th>Макс. грузоподъемность</th>
+            <th>Текущий вес</th>
+            <th>Перегруз, %</th>
+            <th>Координаты разгрузки (X Y)</th>
+        </tr>
+        {% for truck in trucks %}
+        <tr>
+            <td>{{ truck.board_number }}</td>
+            <td>{{ truck.model }}</td>
+            <td>{{ truck.max_capacity }}</td>
+            <td>{{ truck.current_weight }}</td>
+            <td>{{ truck.overload_percent }}</td>
+            <td>
+                <input type="text" name="x_{{ truck.id }}" size="3">
+                <input type="text" name="y_{{ truck.id }}" size="3">
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <button type="submit">Рассчитать</button>
+</form>
+
+<h2>Таблица 2</h2>
+<table>
+    <tr>
+        <th>Название склада</th>
+        <th>Объем до разгрузки, т</th>
+        <th>Объем после разгрузки, т</th>
+        <th>Качественные хар-ки после разгрузки</th>
+    </tr>
+    <tr>
+        <td>{{ selected_warehouse.name }}</td>
+        <td>{{ selected_warehouse.current_weight }}</td>
+        <td>{{ final_volume }}</td>
+        <td>{{ final_sio2 }}% SiO₂, {{ final_fe }}% Fe</td>
+    </tr>
+</table>
+{% endif %}
+{% endblock %}

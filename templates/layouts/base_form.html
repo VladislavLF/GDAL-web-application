@@ -1,0 +1,13 @@
+{% extends 'layouts/base_page.html' %}
+{% block content %}
+  <h2>{% block heading %}{% endblock %}</h2>
+  <form method="post" style="max-width: 600px; margin: 20px auto; padding: 15px; border: 1px solid #ccc; border-radius: 8px; background: #f9f9f9;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% block poligon %}{% endblock %}
+    <button type="submit" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Создать</button>
+  </form>
+  <div style="text-align: center; margin-top: 20px;">
+  <a href="{% url 'index' %}">Назад</a>
+  </div>
+{% endblock %}
