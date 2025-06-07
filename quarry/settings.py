@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'quarry.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'test_digit',
-        'USER': 'postgres',
-        'PASSWORD': 'Inepam181312!',
+        'NAME': 'name',
+        'USER': 'user',
+        'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': '5432',
     }
